@@ -1,0 +1,13 @@
+<!-- <ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="Newsfeed"   tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Mensajes"   tabIcon="paper"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Archivador" tabIcon="archive"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="Ruta"       tabIcon="bus"></ion-tab>
+</ion-tabs>
+ -->
+
+<ion-tabs [selectedIndex]="myIndex" color="cloom">
+    <ion-tab [root]="tab1Root" tabTitle="NewsFeed" tabIcon="home"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="Archives" tabIcon="archive"></ion-tab>
+    <ion-tab [root]="tab3Root" tabTitle="Messages" tabBadge="{{NotfBadge}}" tabBadgeStyle="cloomb" tabIcon="notifications"></ion-tab>
+</ion-tabs>

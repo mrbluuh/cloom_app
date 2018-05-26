@@ -1,0 +1,35 @@
+
+<ion-header no-border>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Messages</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+
+    <ion-refresher (ionRefresh)="refresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    
+    <ion-card *ngFor="let message of messages" >
+      <ion-item>
+        <h2>{{message.user.name}}</h2>
+        <p>{{message.type}}</p>
+      </ion-item>
+  
+      <ion-card-content [innerHTML] = "message.body">
+      </ion-card-content>
+      <button ion-item (click)="openModal(message)">
+          View
+      </button>
+    </ion-card>
+
+
+
+  </ion-content>

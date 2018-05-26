@@ -1,0 +1,46 @@
+<!--
+  Generated template for the CreatenotificationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+    <ion-navbar>
+      <button ion-button clear (click)="backbtn()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <ion-title>Create Message</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+
+<ion-content padding>
+
+    <ion-card id="card-content">
+        <ion-card-content>
+          <form #FormMessage="ngForm" (ngSubmit)="createMessage(FormMessage)">
+            <ion-item id="rounded">
+              <ion-label floating>ID user to send Message</ion-label>
+              <ion-input [(ngModel)]="FormMessage.id_user_to" name="id_user_to" type="number" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Type Message</ion-label>
+              <ion-select [(ngModel)]="FormMessage.type_message" name="type_message" required>
+                <ion-option value="1">Important</ion-option>
+                <ion-option value="2">Normal</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Body</ion-label>
+              <ion-textarea [(ngModel)]="FormMessage.body" name="body" required></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <button [disabled]='!FormMessage.form.valid' type="submit" full ion-button round >Create Message</button> 
+            </ion-item>
+          </form>
+        </ion-card-content>
+      </ion-card>
+
+</ion-content>
