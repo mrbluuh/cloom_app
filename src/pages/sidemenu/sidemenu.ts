@@ -8,6 +8,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login';
 import { MessagePage } from '../message/message';
 import { CreatemessagePage } from '../createmessage/createmessage';
+import { MapsPage } from '../maps/maps';
 /**
  * Generated class for the SidemenuPage page.
  *
@@ -40,7 +41,7 @@ export class SidemenuPage {
   @ViewChild(Nav) nav: Nav;
   pages: PageInterface[] = [
     { title: 'Newsfeed', name: 'Newsfeed', component: TabsPage, tabComponent: NewsfeedPage, index:0, icon:'home' },
-    { title: 'Archives', name: 'Archive', component: TabsPage, tabComponent: ArchivePage, index:1, icon:'archive' },
+    { title: 'Maps', name: 'Maps', component: TabsPage, tabComponent: MapsPage, index:1, icon:'map' },
     { title: 'Messages', name: 'Message', component: TabsPage, tabComponent: MessagePage, index:2, icon:'notifications' },
   ]
 

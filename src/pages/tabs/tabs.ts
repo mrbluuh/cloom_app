@@ -6,6 +6,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MessageProvider } from '../../providers/message/message';
 import { MessagePage } from '../message/message';
+import { MapsPage } from '../maps/maps';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -15,7 +16,7 @@ export class TabsPage {
   user_role:number = 0;
   NotfBadge:number;
   tab1Root = NewsfeedPage;
-  tab2Root = ArchivePage;
+  tab2Root = MapsPage;
   tab3Root = MessagePage;
   myIndex: number;
 

@@ -29,6 +29,8 @@ import { MessageProvider } from '../providers/message/message';
 import { MessagePage } from '../pages/message/message';
 import { CreatemessagePage } from '../pages/createmessage/createmessage';
 import { SettingsPage } from '../pages/settings/settings';
+import { MapsPage } from '../pages/maps/maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { SettingsPage } from '../pages/settings/settings';
     ModalNotfsPage,
     SidemenuPage,
     CreatemessagePage,
-    SettingsPage
+    SettingsPage,
+    MapsPage
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { SettingsPage } from '../pages/settings/settings';
     SidemenuPage,
     CreatemessagePage,
     SettingsPage,
+    MapsPage
 
 
   ],
@@ -75,6 +79,7 @@ import { SettingsPage } from '../pages/settings/settings';
     AuthProvider,
     NewsfeedProvider,
     MessageProvider,
+    Geolocation
   ]
 })
 export class AppModule {}
