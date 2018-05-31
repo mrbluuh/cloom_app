@@ -11,23 +11,21 @@
   </ion-header>
   
   
-  <ion-content padding>
+  <ion-content>
 
     <ion-refresher (ionRefresh)="refresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     
-    <ion-card *ngFor="let message of messages" >
-      <ion-item>
+    <ion-card *ngFor="let message of messages" (click)="openModal(message)">
+      <ion-item [color]="messageColor(message)">
+        <ion-avatar item-start>
+          <img [src]="message.user.avatar">
+        </ion-avatar>
         <h2>{{message.user.name}}</h2>
         <p>{{message.type}}</p>
+        <small>{{message.created_at}}</small>
       </ion-item>
-  
-      <ion-card-content [innerHTML] = "message.body">
-      </ion-card-content>
-      <button ion-item (click)="openModal(message)">
-          View
-      </button>
     </ion-card>
 
 

@@ -11,15 +11,53 @@
 </ion-header>
 
 
-<ion-content padding >
-  <ion-card *ngFor="let newsfeed of newsfeeds">
+<ion-content >
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+  <!-- <ion-card *ngFor="let newsfeed of newsfeeds" class="card-newsfeed">
     <img [src]="newsfeed.image"/>
-    <ion-card-content>
+    <ion-card-content class="card-newsfeed-content">
       <ion-card-title>
         {{newsfeed.title}}
         </ion-card-title>
       <p [innerHTML] = "newsfeed.body"></p>
     </ion-card-content>
+  </ion-card> -->
+
+  <ion-card *ngFor="let newsfeed of newsfeeds" class="card-newsfeed">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src]="newsfeed.user.avatar">
+      </ion-avatar>
+      <h2>{{newsfeed.user.name}}</h2>
+      <p>{{newsfeed.created_at}}</p>
+    </ion-item>
+  
+    <img [src]="newsfeed.image"/>
+  
+    <ion-card-content>
+      <p [innerHTML] = "newsfeed.body"></p>
+    </ion-card-content>
+  
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  
   </ion-card>
 
 </ion-content>

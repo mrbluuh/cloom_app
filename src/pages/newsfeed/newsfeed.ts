@@ -19,6 +19,7 @@ import { NewsfeedProvider } from '../../providers/newsfeed/newsfeed';
 })
 export class NewsfeedPage {
   newsfeeds:any;
+
   constructor(
       public http: Http,
       public navCtrl: NavController,  
@@ -31,7 +32,19 @@ export class NewsfeedPage {
     this.Newsfeed.showNewsfeed()
           .then(data => {
             this.newsfeeds = data;
+          })     
+  }
+
+
+  refresh(refresher){
+    this.Newsfeed.showNewsfeed()
+          .then(data => {
+            this.newsfeeds = data;
           })
+
+      setTimeout(() => {
+        refresher.complete();
+      }, 1000);
   }
 
 }

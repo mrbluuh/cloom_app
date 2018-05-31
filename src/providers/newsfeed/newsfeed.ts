@@ -2,6 +2,7 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { config } from '../../app/config';
+import moment from 'moment';
 
 /*
   Generated class for the PostProvider provider.
@@ -28,10 +29,13 @@ export class NewsfeedProvider {
         .map(res =>  res.json())
         .subscribe(data => {
           for(let news of data){
+            news.created_at = moment().format("dddd, MMMM YYYY");   
             if(news.image == null){
               news.image = 'http://via.placeholder.com/350x150';
+              news.user.avatar = 'http://via.placeholder.com/350x150';
             }else{
             news.image = config.imgUrl+news.image;
+            news.user.avatar = config.imgUrl+news.user.avatar;
             }
           }
           this.data = data;

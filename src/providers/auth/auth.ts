@@ -10,7 +10,7 @@ import { config } from '../../app/config';
 
 @Injectable()
 export class AuthProvider {
-  auth:any;
+  auth:any = {};
   private user = new BehaviorSubject<any>({});
   baseUrl:string = config.baseUrl;
   constructor( public http: Http, public alertCtrl: AlertController ) {
@@ -20,20 +20,19 @@ export class AuthProvider {
 
   login(data){
       
-      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' });
       let options = new RequestOptions({ headers: headers });
 
       return new Promise(resolve => { 
-        this.http.post(this.baseUrl+'login',data,options)
-          .map(res => {
-            resolve(res.json())
-            this.extractData(res);
-          })
+        this.http.post(this.baseUrl+'login',data)
+          .map(res => res.json())
           .subscribe(data => {
+            this.extractData(data);
+            resolve(data);
           }, error => {
             let errorLogin = this.alertCtrl.create({
               title: 'Error login',
-              subTitle: 'Invalid Credentials',
+              subTitle: 'Invalid Credentials '+error,
               buttons: ['OK']
             });
             errorLogin.present();
@@ -78,9 +77,9 @@ export class AuthProvider {
 
 
   private extractData(res: Response){
-      let body = res.json();
-      if(body.access_token){
-        window.localStorage.setItem('token',body.access_token);
+      let body = res;
+      if(body['access_token']){
+        window.localStorage.setItem('token',body['access_token']);
       };
     }
 }

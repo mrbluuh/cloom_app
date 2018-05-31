@@ -3,6 +3,8 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { config } from '../../app/config';
+import moment from 'moment';
+
 
 /*
   Generated class for the NotificationProvider provider.
@@ -57,6 +59,10 @@ export class MessageProvider {
         this.http.get(this.baseUrl+'message',options)
         .map(res => {
           this.data = res.json();
+          for(let message of this.data.messages){
+            message.created_at = moment().format("dddd, MMMM YYYY");  
+            message.user.avatar = config.imgUrl + message.user.avatar
+          }
           resolve(this.data);
         })
         .subscribe(data=>{
@@ -91,13 +97,30 @@ export class MessageProvider {
 
       return new Promise(resolve => {
         this.http.post(this.baseUrl+'messagestatus',data,options)
-        .map(res => {
-          res.json()
-        })
+        .map(res => res.json() )
         .subscribe(data => {
           resolve('success');
         })
       })
+    }
+
+
+    deleteMessage(id){
+      let headers = new Headers(
+        {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer '+window.localStorage.getItem('token')
+        });
+      let options = new RequestOptions({ headers: headers });
+
+      return new Promise(resolve => {
+        this.http.get(this.baseUrl+'deletemessage/'+id,options)
+        .map(res => res.json() )
+        .subscribe(data => {
+          resolve('success');
+        })
+      })
+
     }
 
 

@@ -11,8 +11,7 @@
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -21,17 +20,35 @@
 
 
 
-<ion-content>
-  <ion-list>
+<ion-content >
+  <ion-list no-lines>
       <ion-item>
         <ion-avatar item-start>
-          <img src="http://via.placeholder.com/350x150">
+          <img [src]="message.user.avatar">
         </ion-avatar>
-        <h2>From: {{message.user.name}}</h2>
-      </ion-item>
-      <ion-card-content [innerHTML] = "message.body">
-        </ion-card-content>
-        <ion-item >
+        <h1>{{message.user.name}}</h1>
+        <p>{{message.created_at}}</p>
       </ion-item>
   </ion-list>
+  <div>
+    <ion-card>
+      <ion-card-content text-wrap>
+          <p [innerHTML] = "message.body"></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
+
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-buttons *ngIf="message.type=='Important'"  (click)="accepted(message.id)">
+          <button ion-button outline>Accept</button>
+        </ion-buttons>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="deleteMessage(message.id,message.status,message.type,message.accepted)">
+          <ion-icon color="danger" name="trash"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>

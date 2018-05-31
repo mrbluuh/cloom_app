@@ -8,13 +8,13 @@
 
   <ion-content padding class="no-scroll">
     <ion-list no-lines>
-        <button color="cloom" menuClose ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
-            <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
-            {{p.title}}
+        <button [color]="isActive(p)" menuClose ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
+            <ion-icon item-start [name]="p.icon" ></ion-icon>
+            <h2 class="text-sidemenu">{{p.title}}</h2>
         </button>
         <button color="cloom" menuClose ion-item detail-none (click)="logout()">
             <ion-icon item-start name="log-out"></ion-icon>
-            Log Out
+            <h2 class="text-sidemenu">Logout</h2>
         </button>
     </ion-list>
 </ion-content>

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ion
 import { ModalNotfsPage } from '../modal-notfs/modal-notfs';
 import { MessageProvider } from '../../providers/message/message';
 
+
 /**
  * Generated class for the NotificationPage page.
  *
@@ -36,8 +37,7 @@ export class MessagePage {
               message.type = 'Normal';
             }
           }
-          this.messages = data['messages'];
-          
+          this.messages = data['messages']; 
         });
   }
 
@@ -62,12 +62,24 @@ export class MessagePage {
   }
 
   openModal(MessageData) {
+    MessageData.status = 'TRUE';
     let modal = this.modalCtrl.create(ModalNotfsPage,{'Message':MessageData});
+    modal.onDidDismiss(()=>{
+      this.ionViewDidLoad();
+    })
     modal.present();
     this.Message.changeStatusNotf(MessageData.id).then(data => {
       this.Message.getMessageBadges();
     });
   }
 
+
+
+  messageColor(message){
+    if(message.type == 'Important'){
+      return 'important';
+    }
+    return 'normal';
+  }
 
 }

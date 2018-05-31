@@ -39,7 +39,7 @@ export class SidemenuPage {
 
   @ViewChild(Nav) nav: Nav;
   pages: PageInterface[] = [
-    { title: 'NewsFeed', name: 'NewsFeed', component: TabsPage, tabComponent: NewsfeedPage, index:0, icon:'home' },
+    { title: 'Newsfeed', name: 'Newsfeed', component: TabsPage, tabComponent: NewsfeedPage, index:0, icon:'home' },
     { title: 'Archives', name: 'Archive', component: TabsPage, tabComponent: ArchivePage, index:1, icon:'archive' },
     { title: 'Messages', name: 'Message', component: TabsPage, tabComponent: MessagePage, index:2, icon:'notifications' },
   ]
@@ -52,15 +52,11 @@ export class SidemenuPage {
       public auth:AuthProvider) {
         
         this.auth.getUser().then(data=>{
-          if(data['success']['role_id'] == 1){
-            this.user = data.success;
-            this.pages.push({ title: 'Create Message', name: 'CreateMessage', component: CreatemessagePage,  icon:'create' })
+          this.user = data.success;
+          if(data.success.role_id == 1){
+            this.pages.push({ title: 'Create message', name: 'CreateMessage', component: CreatemessagePage,  icon:'create' })
           }
         })
-
-        console.log(this.user.avatar);
-        
-    
   }
 
   logout(){
@@ -92,12 +88,12 @@ export class SidemenuPage {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
         return 'cloomb';
       }
-      return;
+      return 'cloom';
     }
 
     if (this.nav.getActive() && this.nav.getActive().name === page.name) {
       return 'cloomb';
     }
-    return;
+    return 'cloom';
   }
 }

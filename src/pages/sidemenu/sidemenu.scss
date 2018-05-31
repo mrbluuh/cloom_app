@@ -23,5 +23,10 @@ page-sidemenu {
     .no-scroll .scroll-content{
         overflow: hidden;
         background-color: #2699fb;
+
+        .text-sidemenu{
+            margin-top: .15em;
+            margin-left: 0.5em;
+        }
     }
 }
