@@ -9,6 +9,8 @@ import { LoginPage } from '../login/login';
 import { MessagePage } from '../message/message';
 import { CreatemessagePage } from '../createmessage/createmessage';
 import { MapsPage } from '../maps/maps';
+import { SubjectsPage } from '../subjects/subjects';
+import { ChildPage } from '../child/child';
 /**
  * Generated class for the SidemenuPage page.
  *
@@ -54,8 +56,11 @@ export class SidemenuPage {
         
         this.auth.getUser().then(data=>{
           this.user = data.success;
-          if(data.success.role_id == 1){
-            this.pages.push({ title: 'Create message', name: 'CreateMessage', component: CreatemessagePage,  icon:'create' })
+          if(data.success.role_id == 1 || data.success.role_id == 2){
+            this.pages.push({ title: 'Subjects', name: 'Subjects', component: TabsPage, tabComponent: SubjectsPage, index:3, icon:'book' });
+            this.pages.push({ title: 'Create message', name: 'CreateMessage', component: CreatemessagePage,  icon:'create' });
+          }else if(data.success.role_id == 3){
+            this.pages.push({ title: 'Students', name: 'Students', component: TabsPage, tabComponent: ChildPage, index:3, icon:'body' });
           }
         })
   }

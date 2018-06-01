@@ -9,5 +9,7 @@
 <ion-tabs [selectedIndex]="myIndex" color="cloom">
     <ion-tab [root]="tab1Root" tabTitle="NewsFeed" tabIcon="home"></ion-tab>
     <ion-tab [root]="tab2Root" tabTitle="Maps" tabIcon="map"></ion-tab>
-    <ion-tab [root]="tab3Root" tabTitle="Messages" tabBadge="{{NotfBadge}}" tabBadgeStyle="cloomb" tabIcon="notifications"></ion-tab>
+    <ion-tab *ngIf="user_role == 1 || user_role == 2" [root]="tab3Root" tabTitle="Subjects" tabIcon="book"></ion-tab>
+    <ion-tab [root]="tab4Root" tabTitle="Messages" tabBadge="{{NotfBadge}}" tabBadgeStyle="cloomb" tabIcon="notifications"></ion-tab>
+    <ion-tab *ngIf="user_role == 3" [root]="tab5Root" tabTitle="Students" tabIcon="body"></ion-tab>
 </ion-tabs>

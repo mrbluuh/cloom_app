@@ -1,0 +1,44 @@
+<!--
+  Generated template for the SubjectsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Subjects</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+
+<ion-content>
+  <div cards>
+    <div *ngIf="subjects.length > 1;else next">
+      <ion-row class="grid-full">
+        <ion-col col-6 *ngFor="let s of subjects">
+            <ion-card (click)="nextPage(s)">
+                <ion-card-header>
+                  <p>{{s}}</p>
+                </ion-card-header>
+              </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ng-template #next>
+      <ion-row>
+        <ion-col>
+          <ion-card (click)="nextPage(subjects)">
+              <ion-card-header>
+                <p>{{subjects.name}}</p>
+              </ion-card-header>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </div>
+</ion-content>

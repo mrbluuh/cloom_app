@@ -56,9 +56,85 @@ export class AuthProvider {
             ofuser.success.avatar = config.imgUrl + res.json().success.avatar;
             return ofuser;
           }).toPromise();
-    
   }
-  
+
+  getStudent(){
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer '+window.localStorage.getItem('token')
+      });
+      let options = new RequestOptions({ headers: headers });
+        
+      return this.http.get( this.baseUrl+'studentuser', options)
+        .map( res => {
+            let students = res.json();
+            return students;
+          }).toPromise();
+  }
+
+  getStudentAward(id){
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer '+window.localStorage.getItem('token')
+      });
+      let options = new RequestOptions({ headers: headers });
+        
+      return this.http.get( this.baseUrl+'studentadward/'+id, options)
+        .map( res => {
+            let awards = res.json();
+            for(let aw of awards){
+              aw.adward.icon = config.imgUrl + aw.adward.icon;
+            }
+            return awards;
+          }).toPromise();
+  }
+
+
+
+
+  getAdwards(){
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer '+window.localStorage.getItem('token')
+      });
+      let options = new RequestOptions({ headers: headers });
+        
+      return this.http.get( this.baseUrl+'adwards', options)
+        .map( res => {
+            let adwards = res.json();
+            for(let a of adwards){
+              a.icon = config.imgUrl + a.icon;
+            }
+            return adwards;
+          }).toPromise();
+  }
+
+  addAdward(id_student:number, id_adward:number){
+
+    var data ={"id_student":id_student,"id_adward":id_adward}
+      let headers = new Headers(
+        {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer '+window.localStorage.getItem('token')
+        });
+      let options = new RequestOptions({ headers: headers });
+
+      return new Promise(resolve => {
+        this.http.post(this.baseUrl+'addadward',data,options)
+        .map(res => res.json() )
+        .subscribe(data => {
+          resolve('success');
+        })
+      })
+
+  }
    
   isLogged(){
     return this.getUser().then(data => {      

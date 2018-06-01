@@ -1,0 +1,39 @@
+<!--
+  Generated template for the ModalAdwardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+    <ion-toolbar>
+      <ion-title>
+        Add Award to student
+      </ion-title>
+      <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+<ion-content>
+
+
+  <div cards>
+      <ion-row class="grid-full">
+        <ion-col col-sm-6 *ngFor="let a of adwards">
+          <ion-card class="cardGroups" (click)="addAdward(a)">
+            <ion-card-header>
+              <p text-wrap>{{a.name}}</p>
+              <br>
+              <img [src]="a.icon">
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+
+</ion-content>

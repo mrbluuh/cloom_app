@@ -29,8 +29,6 @@ export class LoginPage {
   login(FormLogin){
     this.auth.login(FormLogin.value)
       .then(data => {
-        console.log(data);
-        
         if(data['access_token']){
           this.navCtrl.setRoot(SidemenuPage);
         }else{

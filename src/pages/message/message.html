@@ -16,7 +16,29 @@
     <ion-refresher (ionRefresh)="refresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+
     
+    <div *ngIf="user.role_id == 1 || user.role_id == 2">
+    <ion-card (click)="openSentMessModal(sentmessages)">
+      <ion-card-header>
+        <ion-item>
+          <h2>Watch sent messages </h2>
+          <ion-badge color="danger" item-end>{{user.sentcount}}</ion-badge>
+        </ion-item>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <ion-card *ngIf="messages==''">
+      <ion-card-header>
+        <ion-item>
+          <h2>there are no new messages</h2>
+        </ion-item>
+      </ion-card-header>
+    </ion-card>
+
+
+
     <ion-card *ngFor="let message of messages" (click)="openModal(message)">
       <ion-item [color]="messageColor(message)">
         <ion-avatar item-start>

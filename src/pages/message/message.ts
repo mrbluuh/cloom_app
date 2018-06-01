@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
 import { ModalNotfsPage } from '../modal-notfs/modal-notfs';
 import { MessageProvider } from '../../providers/message/message';
+import { AuthProvider } from '../../providers/auth/auth';
+import { ModalSentmessPage } from '../modal-sentmess/modal-sentmess';
 
 
 /**
@@ -18,27 +20,43 @@ import { MessageProvider } from '../../providers/message/message';
 })
 export class MessagePage {
   messages:any;
+  user:any = {};
+  sentmessages:any;
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
       public modalCtrl: ModalController,
-      public Message:MessageProvider) {
+      public Message:MessageProvider,
+      public User: AuthProvider) {
+
       
   }
 
 
-  ionViewDidLoad(){
-    this.Message.showMessages()
-        .then(data => {
-          for (let message of data['messages']){
-            if(message.id_type_message == 1){
-              message.type = 'Important';
-            }else{
-              message.type = 'Normal';
-            }
-          }
-          this.messages = data['messages']; 
-        });
+  ionViewDidEnter(){
+
+  this.Message.showMessages()
+    .then(data => {
+      for (let message of data['messages']){
+        if(message.id_type_message == 1){
+          message.type = 'Important';
+        }else{
+          message.type = 'Normal';
+        }
+      }
+      this.messages = data['messages']; 
+    });
+
+  this.Message.getSentMessages()
+    .then(data => {
+      this.user.sentcount = data['messages'].length;
+      this.sentmessages = data['messages'];
+    })
+
+  this.User.getUser()
+    .then(data=>{
+      this.user = data['success'];
+    })
   }
 
   refresh(refresher){
@@ -65,7 +83,7 @@ export class MessagePage {
     MessageData.status = 'TRUE';
     let modal = this.modalCtrl.create(ModalNotfsPage,{'Message':MessageData});
     modal.onDidDismiss(()=>{
-      this.ionViewDidLoad();
+      this.ionViewDidEnter();
     })
     modal.present();
     this.Message.changeStatusNotf(MessageData.id).then(data => {
@@ -73,6 +91,16 @@ export class MessagePage {
     });
   }
 
+
+  openSentMessModal(messages){
+
+    let modal = this.modalCtrl.create(ModalSentmessPage,{'Messages':messages});
+    modal.onDidDismiss(()=>{
+      this.ionViewDidEnter();
+    })
+    modal.present();
+
+  }
 
 
   messageColor(message){

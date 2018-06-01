@@ -31,6 +31,14 @@ import { CreatemessagePage } from '../pages/createmessage/createmessage';
 import { SettingsPage } from '../pages/settings/settings';
 import { MapsPage } from '../pages/maps/maps';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ModalSentmessPage } from '../pages/modal-sentmess/modal-sentmess';
+import { SubjectsPage } from '../pages/subjects/subjects';
+import { SubjectProvider } from '../providers/subject/subject';
+import { GroupgradePage } from '../pages/groupgrade/groupgrade';
+import { StudentsPage } from '../pages/students/students';
+import { ModalAdwardPage } from '../pages/modal-adward/modal-adward';
+import { ChildPage } from '../pages/child/child';
+import { ModalStudentawardsPage } from '../pages/modal-studentawards/modal-studentawards';
 
 
 @NgModule({
@@ -46,7 +54,16 @@ import { Geolocation } from '@ionic-native/geolocation';
     SidemenuPage,
     CreatemessagePage,
     SettingsPage,
-    MapsPage
+    MapsPage,
+    ModalSentmessPage,
+    SubjectsPage,
+    GroupgradePage,
+    StudentsPage,
+    ModalAdwardPage,
+    ChildPage,
+    ModalStudentawardsPage
+  
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +85,14 @@ import { Geolocation } from '@ionic-native/geolocation';
     SidemenuPage,
     CreatemessagePage,
     SettingsPage,
-    MapsPage
+    MapsPage,
+    ModalSentmessPage,
+    SubjectsPage,
+    GroupgradePage,
+    StudentsPage,
+    ModalAdwardPage,
+    ChildPage,
+    ModalStudentawardsPage
 
 
   ],
@@ -79,7 +103,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     AuthProvider,
     NewsfeedProvider,
     MessageProvider,
-    Geolocation
+    Geolocation,
+    SubjectProvider
   ]
 })
 export class AppModule {}

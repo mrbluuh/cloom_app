@@ -43,7 +43,32 @@ export class MessageProvider {
     }) 
 
   }
+  
+  getSentMessages(){
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer '+window.localStorage.getItem('token')
+      });
+    let options = new RequestOptions({ headers: headers });
+        
+    
+      return new Promise(resolve => {
+        this.http.get(this.baseUrl+'sentmessages',options)
+        .map(res => {
+          this.data = res.json();
+          for(let message of this.data.messages){
+            message.created_at = moment().format("dddd, MMMM YYYY");  
+            message.userto.avatar = config.imgUrl + message.userto.avatar
+          }
+          resolve(this.data);
+        })
+        .subscribe(data=>{
+        })
+      }) 
 
+  }
 
   showMessages(){
     let headers = new Headers(
