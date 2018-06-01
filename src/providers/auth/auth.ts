@@ -11,7 +11,9 @@ import { config } from '../../app/config';
 @Injectable()
 export class AuthProvider {
   auth:any = {};
-  private user = new BehaviorSubject<any>({});
+  private badge = new BehaviorSubject<number>(0);
+  cast = this.badge.asObservable();
+  
   baseUrl:string = config.baseUrl;
   constructor( public http: Http, public alertCtrl: AlertController ) {
   }

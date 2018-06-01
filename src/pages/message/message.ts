@@ -22,18 +22,23 @@ export class MessagePage {
   messages:any;
   user:any = {};
   sentmessages:any;
+  csent:number;
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
       public modalCtrl: ModalController,
       public Message:MessageProvider,
       public User: AuthProvider) {
-
+  
+        
       
   }
 
 
   ionViewDidEnter(){
+
+  this.Message.countSentMessages();
+  this.Message.cast2.subscribe(csent => this.csent=csent);
 
   this.Message.showMessages()
     .then(data => {
@@ -49,7 +54,6 @@ export class MessagePage {
 
   this.Message.getSentMessages()
     .then(data => {
-      this.user.sentcount = data['messages'].length;
       this.sentmessages = data['messages'];
     })
 

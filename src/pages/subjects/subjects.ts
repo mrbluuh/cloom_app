@@ -27,7 +27,6 @@ export class SubjectsPage {
 
   ionViewDidEnter(){
     this.Subject.getSubjects().then(data=>{
-      
       if(Object.keys(data).length < 2){
         this.subjects = data[0];
       }else{
@@ -40,11 +39,25 @@ export class SubjectsPage {
   }
 
 
-  nextPage(subject){    
-    if(this.groups[subject].length > 1){
-      this.navCtrl.push(GroupgradePage,{'group':this.groups[subject]});
+  nextPage(subject,sub){  
+    if(this.groups!==undefined){
+      if(this.groups[subject].length > 1){
+        this.navCtrl.push(GroupgradePage,{'group':this.groups[subject]});
+      }else{
+        this.Subject.getStudent(this.groups[subject][0]['group_grade']['id']).then(data=>{
+          if(data==''){
+            let errorStudents = this.alertCtrl.create({
+              title: 'Not Students',
+              buttons: ['OK!']
+          });
+          errorStudents.present();
+          }else{
+            this.navCtrl.push(StudentsPage,{'students':data,'group_name':this.groups[subject][0]['group_grade']['name']});
+          }
+        });
+      }
     }else{
-      this.Subject.getStudent(this.groups[subject][0]['group_grade']['id']).then(data=>{
+      this.Subject.getStudent(sub.group_grade.id).then(data=>{
         if(data==''){
           let errorStudents = this.alertCtrl.create({
             title: 'Not Students',
@@ -52,9 +65,10 @@ export class SubjectsPage {
         });
         errorStudents.present();
         }else{
-          this.navCtrl.push(StudentsPage,{'students':data,'group_name':this.groups[subject][0]['group_grade']['name']});
+          this.navCtrl.push(StudentsPage,{'students':data,'group_name':sub.group_grade.name});
         }
-      });
+      })
     }
+    
   }
 }

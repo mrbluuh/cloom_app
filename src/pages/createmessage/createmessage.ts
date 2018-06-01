@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { MessageProvider } from '../../providers/message/message';
 import { SidemenuPage } from '../sidemenu/sidemenu';
 import { NewsfeedPage } from '../newsfeed/newsfeed';
@@ -23,11 +23,18 @@ export class CreatemessagePage {
       public navCtrl: NavController, 
       public navParams: NavParams, 
       public alertCtrl:AlertController, 
-      public Message: MessageProvider) {
+      public Message: MessageProvider,
+      public loadingCtrl: LoadingController) {
   }
 
   createMessage(formData){
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
     this.Message.createMessage(formData.value).then(data=>{
+      loader.dismiss();  
       let alert = this.alertCtrl.create({
         title: 'Message Sent',
         buttons: ['OK!']

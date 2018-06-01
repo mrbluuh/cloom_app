@@ -39,6 +39,7 @@ import { StudentsPage } from '../pages/students/students';
 import { ModalAdwardPage } from '../pages/modal-adward/modal-adward';
 import { ChildPage } from '../pages/child/child';
 import { ModalStudentawardsPage } from '../pages/modal-studentawards/modal-studentawards';
+import { RouteProvider } from '../providers/route/route';
 
 
 @NgModule({
@@ -104,7 +105,8 @@ import { ModalStudentawardsPage } from '../pages/modal-studentawards/modal-stude
     NewsfeedProvider,
     MessageProvider,
     Geolocation,
-    SubjectProvider
+    SubjectProvider,
+    RouteProvider
   ]
 })
 export class AppModule {}

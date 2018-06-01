@@ -19,6 +19,8 @@ export class MessageProvider {
   cbadge:number = 0;
   private badge = new BehaviorSubject<number>(0);
   cast = this.badge.asObservable();
+  private csent = new BehaviorSubject<number>(0);
+  cast2 = this.csent.asObservable();
   constructor(public http: Http) {
   }
 
@@ -68,6 +70,13 @@ export class MessageProvider {
         })
       }) 
 
+  }
+
+  countSentMessages(){
+    var count:number = 0;
+    this.getSentMessages().then(data=>{
+      this.csent.next(Object.keys(data['messages']).length);
+    })
   }
 
   showMessages(){
