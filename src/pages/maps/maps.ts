@@ -1,32 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GESTURE_PRIORITY_TOGGLE } from 'ionic-angular/gestures/gesture-controller';
 import { NewsfeedProvider } from '../../providers/newsfeed/newsfeed';
+import { MapComponent } from '../../components/map/map';
+import { RouteProvider } from '../../providers/route/route';
 
 declare var google:any;
 
-/**
- * Generated class for the MapsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html',
 })
-export class MapsPage {
+export class MapsPage implements OnInit {
 
   map: any;
   markers: any;
   parkings: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-              public geolocation: Geolocation, private platform: Platform) {
+              public geolocation: Geolocation, private platform: Platform,
+              public Route: RouteProvider) {
   }
+
+
+  ngOnInit(){
+    this.fetchAndRefreshCars();
+  }
+
+  fetchAndRefreshCars(){
+  }
+
+  updateCarMarker(){}
 
   refresh(){
     this.ionViewDidEnter();
@@ -68,7 +75,6 @@ export class MapsPage {
       this.addInfoWindow(marker,content);
       marker.setMap(this.map);
     }
-
   }
 
 

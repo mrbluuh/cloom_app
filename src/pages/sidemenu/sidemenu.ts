@@ -56,7 +56,9 @@ export class SidemenuPage {
         
         this.auth.getUser().then(data=>{
           this.user = data.success;
-          if(data.success.role_id == 1 || data.success.role_id == 2){
+          if(data.success.role_id == 1){
+            this.pages.push({ title: 'Create message', name: 'CreateMessage', component: CreatemessagePage,  icon:'create' });
+          }else if(data.success.role_id == 2){
             this.pages.push({ title: 'Subjects', name: 'Subjects', component: TabsPage, tabComponent: SubjectsPage, index:3, icon:'book' });
             this.pages.push({ title: 'Create message', name: 'CreateMessage', component: CreatemessagePage,  icon:'create' });
           }else if(data.success.role_id == 3){

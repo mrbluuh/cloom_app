@@ -2,7 +2,7 @@
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { config } from '../../app/config';
+import { config } from '../../assets/js/config';
 import moment from 'moment';
 
 

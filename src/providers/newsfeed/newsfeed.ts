@@ -1,7 +1,7 @@
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
-import { config } from '../../app/config';
+import { config } from '../../assets/js/config';
 import moment from 'moment';
 
 /*

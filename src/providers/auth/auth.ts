@@ -5,7 +5,7 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AlertController } from 'ionic-angular';
 import { BehaviorSubject } from 'rxjs';
-import { config } from '../../app/config';
+import { config } from '../../assets/js/config';
 
 
 @Injectable()
